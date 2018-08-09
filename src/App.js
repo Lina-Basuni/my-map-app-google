@@ -33,16 +33,16 @@ class App extends Component {
           </div>
           <h1 className="App-title">My Map</h1>
           </header>
-          <body>
-          <div className="mapContainer">
-          <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `590px` }} />}
-          mapElement={<div style={{ height: `100%` }}/>}
-          />
+          <div className="body">
+            <div className="mapContainer">
+            <Map
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `590px` }} />}
+            mapElement={<div style={{ height: `100%` }}/>}
+            />
+            </div>
           </div>
-          </body>
           </div>
         </div>
     );

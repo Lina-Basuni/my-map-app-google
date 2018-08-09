@@ -82,3 +82,29 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+/******search****/
+#mySearch {
+  width: 100%;
+  font-size: 18px;
+  padding: 11px;
+  border:1px solid #ddd;
+}
+
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myMenu li a {
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myMenu li a:hover {
+  background-color: #eee;
+}

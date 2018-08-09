@@ -18,10 +18,21 @@ class Menu extends Component{
           <a href="javascript:void(0)" className="closebtn" onClick={()=>{
             this.props.closeNav()
           }}>&times;</a>
-          <a></a>
-          <a></a>
-          <a></a>
-          <a></a>
+          <div className="searchWrapper">
+            <input type="text" id="mySearch"  placeholder="Search.." title="Type in a category"/>
+            <ul id="myMenu">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     )
