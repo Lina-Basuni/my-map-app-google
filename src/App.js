@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { GoogleMap, Marker } from "react-google-maps";
+import Map from './map';
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,12 +9,18 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">My Map</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <body>
+          <div className="mapContainer">
+            <Map
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `590px` }} />}
+              mapElement={<div style={{ height: `100%` }}/>}
+            />
+          </div>
+        </body>
       </div>
     );
   }
