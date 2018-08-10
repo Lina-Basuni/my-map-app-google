@@ -7,6 +7,12 @@ import './App.css';
 
 class App extends Component {
 
+  state={
+    markers:[];
+  }
+
+
+
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
   openNav= ()=> {
       document.getElementById("mySidenav").style.width = "250px";
@@ -31,7 +37,7 @@ class App extends Component {
             closeNav={this.closeNav}
           />
           </div>
-          <h1 className="App-title">My Map</h1>
+          <div className="App-title">My Map</div>
           </header>
           <div className="body">
             <div className="mapContainer">
