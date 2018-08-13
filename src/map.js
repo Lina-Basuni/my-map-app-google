@@ -29,8 +29,7 @@ const Map = withScriptjs(withGoogleMap((props) =>
             }
             >
             {props.currentMarkerID===marker.id &&
-              (<InfoBox
-              onCloseClick={props.closeInfoBox}>
+              (<InfoBox onCloseClick={props.closeInfoBox}>
                 <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
                   <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
                   {marker.id}
