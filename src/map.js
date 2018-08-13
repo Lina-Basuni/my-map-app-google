@@ -23,23 +23,20 @@ const Map = withScriptjs(withGoogleMap((props) =>
             id={marker.id}
             position={marker.position}
             onClick={
-                () => {
-                    props.currentMarker.cmarker={marker}
-                    console.log(props.currentMarker);
-                    props.handleMarkerTap(props.currentMarker.cmarker,props.currentMarker.isOpen)
+                (event) => {
+                    props.openInfoBox(marker.id)
                 }
             }
             >
-            {props.currentMarker.isOpen && <InfoBox
-              onCloseClick={props.handleMarkerTap}
-              options={{ closeBoxURL: ``, enableEventPropagation: true }}
-              >
+            {props.currentMarkerID===marker.id &&
+              (<InfoBox
+              onCloseClick={props.closeInfoBox}>
                 <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
                   <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
                   {marker.id}
                   </div>
                 </div>
-              </InfoBox>}
+              </InfoBox>)}
             </Marker>
           </div>
         )

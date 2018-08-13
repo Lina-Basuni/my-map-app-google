@@ -33,11 +33,7 @@ class App extends Component {
        "position":{ lat: 24.452133, lng: 32.928432  }
      }
    ],
-   currentMarker:{
-     "cmarker":{},
-     "isOpen":false
-   }
-
+   currentMarkerID:-1
  }
 
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -52,18 +48,18 @@ class App extends Component {
       document.getElementById("main").style.marginLeft = "0";
   }
 
-  handleMarkerTap=(marker,isOpen)=>{
-    if (isOpen === false) {
-      this.setState(() => ({
-        currentMarker: {
-          cmarker: {marker},
-          isOpen:true
-        }
-      }))
-    } else if (isOpen === true) {
-      this.setState({isOpen : false})
-    }
+  openInfoBox=(markerID)=>{
+    this.setState({
+      currentMarkerID:markerID
+    })
   }
+
+  closeInfoBox=()=>{
+    this.setState({
+      currentMarkerID:-1
+    })
+  }
+
 
   render() {
     return (
@@ -87,8 +83,10 @@ class App extends Component {
             containerElement={<div style={{ height: `590px` }} />}
             mapElement={<div style={{ height: `100%` }}/>}
             markers={this.state.markers}
-            handleMarkerTap={this.handleMarkerTap}
-            currentMarker={this.state.currentMarker}
+            openInfoBox={this.openInfoBox}
+            closeInfoBox={this.closeInfoBox}
+            currentMarkerID={this.state.currentMarkerID}
+            isOpen={this.state.isOpen}
             />
             </div>
           </div>
