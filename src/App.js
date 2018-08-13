@@ -10,35 +10,34 @@ class App extends Component {
    markers: [
      {
        "id": "Abu-Simbel",
-       "position":{ lat: 22.337232, lng: 31.625799 },
-       "isOpen":false
+       "position":{ lat: 22.337232, lng: 31.625799 }
      },
      {
        "id": "Karnak-Temples",
-       "position":{ lat: 25.718835, lng: 32.65727 },
-       "isOpen":false
+       "position":{ lat: 25.718835, lng: 32.65727 }
      },
      {
        "id": "Luxor-Temple",
-       "position":{ lat: 25.699502, lng: 32.639051 },
-       "isOpen":false
+       "position":{ lat: 25.699502, lng: 32.639051 }
      },
      {
        "id": "Edfu-Temple",
-       "position":{ lat: 24.977929, lng: 32.87337 },
-       "isOpen":false
+       "position":{ lat: 24.977929, lng: 32.87337 }
      },
      {
        "id": " Phiale-Temple",
-       "position":{ lat: 24.025171, lng: 32.884643 },
-       "isOpen":false
+       "position":{ lat: 24.025171, lng: 32.884643 }
      },
      {
        "id": " Kom-Ombo-Temple",
-       "position":{ lat: 24.452133, lng: 32.928432  },
-       "isOpen":false
+       "position":{ lat: 24.452133, lng: 32.928432  }
      }
-   ]
+   ],
+   currentMarker:{
+     "cmarker":{},
+     "isOpen":false
+   }
+
  }
 
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -53,12 +52,16 @@ class App extends Component {
       document.getElementById("main").style.marginLeft = "0";
   }
 
-  handleMarkerTap=(marker)=>{
-
-    if (marker.isOpen === false) {
-      marker.isOpen = true
-    } else if (marker.isOpen === true) {
-      marker.isOpen = false
+  handleMarkerTap=(marker,isOpen)=>{
+    if (isOpen === false) {
+      this.setState(() => ({
+        currentMarker: {
+          cmarker: {marker},
+          isOpen:true
+        }
+      }))
+    } else if (isOpen === true) {
+      this.setState({isOpen : false})
     }
   }
 
@@ -85,6 +88,7 @@ class App extends Component {
             mapElement={<div style={{ height: `100%` }}/>}
             markers={this.state.markers}
             handleMarkerTap={this.handleMarkerTap}
+            currentMarker={this.state.currentMarker}
             />
             </div>
           </div>

@@ -6,6 +6,7 @@ import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 
 
 const Map = withScriptjs(withGoogleMap((props) =>
+
   <GoogleMap
     defaultZoom={6.2}
     defaultCenter={{ lat: 26.820553, lng: 30.802498 }}
@@ -13,21 +14,23 @@ const Map = withScriptjs(withGoogleMap((props) =>
   <div className="markers-container">
 
     {
+
       props.markers.map(
         (marker)=>(
           <div key={marker.id}>
             <Marker
+            title={marker.id}
             id={marker.id}
             position={marker.position}
             onClick={
                 () => {
-                  props.handleMarkerTap(marker)
-                  console.log(marker.id+" is "+marker.isOpen);
-
+                    props.currentMarker.cmarker={marker}
+                    console.log(props.currentMarker);
+                    props.handleMarkerTap(props.currentMarker.cmarker,props.currentMarker.isOpen)
                 }
             }
             >
-            {marker.isOpen && <InfoBox
+            {props.currentMarker.isOpen && <InfoBox
               onCloseClick={props.handleMarkerTap}
               options={{ closeBoxURL: ``, enableEventPropagation: true }}
               >
