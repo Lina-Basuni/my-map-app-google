@@ -33,7 +33,9 @@ class App extends Component {
        "position":{ lat: 24.452133, lng: 32.928432  }
      }
    ],
-   currentMarkerID:-1
+   currentMarkerID:-1,
+   zoom:6.2,
+   center:{lat: 26.820553, lng: 30.802498}
  }
 
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -48,15 +50,20 @@ class App extends Component {
       document.getElementById("main").style.marginLeft = "0";
   }
 
-  openInfoBox=(markerID)=>{
+  openInfoBox=(markerPos,markerID)=>{
     this.setState({
-      currentMarkerID:markerID
+      currentMarkerID:markerID,
+      zoom:11,
+      center:markerPos
     })
   }
 
   closeInfoBox=()=>{
+    console.log("pass2");
     this.setState({
-      currentMarkerID:-1
+      currentMarkerID:-1,
+      zoom:6.2,
+      center:{lat: 26.820553, lng: 30.802498 }
     })
   }
 
@@ -87,6 +94,8 @@ class App extends Component {
             closeInfoBox={this.closeInfoBox}
             currentMarkerID={this.state.currentMarkerID}
             isOpen={this.state.isOpen}
+            zoom={this.state.zoom}
+            center={this.state.center}
             />
             </div>
           </div>

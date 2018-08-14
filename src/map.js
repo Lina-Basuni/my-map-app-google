@@ -8,8 +8,8 @@ import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 const Map = withScriptjs(withGoogleMap((props) =>
 
   <GoogleMap
-    defaultZoom={6.2}
-    defaultCenter={{ lat: 26.820553, lng: 30.802498 }}
+    zoom={props.zoom}
+    center={props.center}
   >
   <div className="markers-container">
 
@@ -24,14 +24,15 @@ const Map = withScriptjs(withGoogleMap((props) =>
             position={marker.position}
             onClick={
                 (event) => {
-                    props.openInfoBox(marker.id)
+                    props.openInfoBox(marker.position,marker.id)
                 }
             }
             >
             {props.currentMarkerID===marker.id &&
-              (<InfoBox onCloseClick={props.closeInfoBox}>
-                <div style={{ backgroundColor: `yellow`, opacity: 0.75, padding: `12px` }}>
-                  <div style={{ fontSize: `16px`, fontColor: `#08233B` }}>
+              (<InfoBox
+                onCloseClick={props.closeInfoBox}>
+                <div style={{ backgroundColor: `#FFFFFF`, padding: `12px` }}>
+                  <div style={{ fontSize: `16px`, fontColor: `#03191B` }}>
                   {marker.id}
                   </div>
                 </div>
