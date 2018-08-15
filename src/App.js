@@ -103,7 +103,7 @@ class App extends Component {
   filterList=(query)=>{
     if(query){
       const match= new RegExp(escapeRegExp(query),'i')
-      let sMarkers=this.state.markers.filter((marker)=>match.test(marker.id))
+      let sMarkers=this.state.initMarkers.filter((marker)=>match.test(marker.id))
       this.setState({markers:sMarkers})
     }
     else{
