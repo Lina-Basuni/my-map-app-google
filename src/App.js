@@ -34,8 +34,11 @@ class App extends Component {
      }
    ],
    currentMarkerID:-1,
+   googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
    zoom:6.2,
-   center:{lat: 26.820553, lng: 30.802498}
+   center:{lat: 26.820553, lng: 30.802498},
+   query:'',
+   searchedMarkers:[]
  }
 
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
@@ -59,12 +62,26 @@ class App extends Component {
   }
 
   closeInfoBox=()=>{
-    console.log("pass2");
     this.setState({
       currentMarkerID:-1,
       zoom:6.2,
       center:{lat: 26.820553, lng: 30.802498 }
     })
+  }
+  changeQuery=(query)=>{
+    this.setState({query:query})
+    this.filterList(query)
+  }
+
+  filterList=(query)=>{
+    if(query){
+      console.log(query);
+      let sMarkers=this.state.markers.filter((marker)=>{marker.id===query})
+      this.setState({searchedMarkers:sMarkers})
+    }
+    else{
+      this.setState({searchedMarkers:this.state.markers})
+    }
   }
 
 
@@ -78,6 +95,14 @@ class App extends Component {
           <Menu
             openNav={this.openNav}
             closeNav={this.closeNav}
+            markers={this.state.markers}
+            openInfoBox={this.openInfoBox}
+            closeInfoBox={this.closeInfoBox}
+            query={this.state.query}
+            changeQuery={this.changeQuery}
+            searchedMarkers={this.searchedMarkers}
+            filterList={this.filterList}
+
           />
           </div>
           <div className="App-title">My Map</div>
@@ -85,7 +110,7 @@ class App extends Component {
           <div className="body">
             <div className="mapContainer">
             <Map
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL={this.state.googleMapURL}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `590px` }} />}
             mapElement={<div style={{ height: `100%` }}/>}
@@ -93,7 +118,6 @@ class App extends Component {
             openInfoBox={this.openInfoBox}
             closeInfoBox={this.closeInfoBox}
             currentMarkerID={this.state.currentMarkerID}
-            isOpen={this.state.isOpen}
             zoom={this.state.zoom}
             center={this.state.center}
             />

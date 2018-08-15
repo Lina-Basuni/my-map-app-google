@@ -19,17 +19,36 @@ class Menu extends Component{
             this.props.closeNav()
           }}>&times;</a>
           <div className="searchWrapper">
-            <input type="text" id="mySearch"  placeholder="Search.." title="Type in a category"/>
+            <input
+              type="text"
+              id="mySearch"
+              placeholder="Search.."
+              title="Type in a category"
+              value={this.props.query}
+              onChange={
+                (event)=>{
+                  this.props.changeQuery(event.target.value)
+                }
+              }
+              />
             <ul id="myMenu">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
+            {
+              this.props.markers.map((marker) => {
+                return(
+                  <a
+                    href="#"
+                    key={marker.id}
+                    onClick={
+                      ()=>(
+                        this.props.openInfoBox(marker.position,marker.id)
+                      )
+                    }
+                  >
+                    {marker.id}
+                  </a>
+                )
+              })
+            }
             </ul>
           </div>
 
