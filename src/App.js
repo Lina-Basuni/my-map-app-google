@@ -64,9 +64,8 @@ class App extends Component {
    googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
    zoom:6.2,
    center:{lat: 26.820553, lng: 30.802498},
-   query:'',
-   searchedMarkers:[]
- }
+   query:''
+  }
 
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
   openNav= ()=> {
