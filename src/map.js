@@ -27,6 +27,8 @@ const Map = withScriptjs(withGoogleMap((props) =>
                     props.openInfoBox(marker.position,marker.id)
                 }
             }
+            
+            animation={props.currentMarkerID===marker.id ? 2 : null}
             >
             {props.currentMarkerID===marker.id &&
               (<InfoBox
