@@ -4,10 +4,37 @@ import Map from './map';
 import logo from './logo.svg';
 import Menu from './menu';
 import './App.css';
+import escapeRegExp from 'escape-string-regexp'
 
 class App extends Component {
   state = {
    markers: [
+     {
+       "id": "Abu-Simbel",
+       "position":{ lat: 22.337232, lng: 31.625799 }
+     },
+     {
+       "id": "Karnak-Temples",
+       "position":{ lat: 25.718835, lng: 32.65727 }
+     },
+     {
+       "id": "Luxor-Temple",
+       "position":{ lat: 25.699502, lng: 32.639051 }
+     },
+     {
+       "id": "Edfu-Temple",
+       "position":{ lat: 24.977929, lng: 32.87337 }
+     },
+     {
+       "id": " Phiale-Temple",
+       "position":{ lat: 24.025171, lng: 32.884643 }
+     },
+     {
+       "id": " Kom-Ombo-Temple",
+       "position":{ lat: 24.452133, lng: 32.928432  }
+     }
+   ],
+   initMarkers: [
      {
        "id": "Abu-Simbel",
        "position":{ lat: 22.337232, lng: 31.625799 }
@@ -75,12 +102,12 @@ class App extends Component {
 
   filterList=(query)=>{
     if(query){
-      console.log(query);
-      let sMarkers=this.state.markers.filter((marker)=>{marker.id===query})
-      this.setState({searchedMarkers:sMarkers})
+      const match= new RegExp(escapeRegExp(query),'i')
+      let sMarkers=this.state.markers.filter((marker)=>match.test(marker.id))
+      this.setState({markers:sMarkers})
     }
     else{
-      this.setState({searchedMarkers:this.state.markers})
+      this.setState({markers:this.state.initMarkers})
     }
   }
 
@@ -100,7 +127,6 @@ class App extends Component {
             closeInfoBox={this.closeInfoBox}
             query={this.state.query}
             changeQuery={this.changeQuery}
-            searchedMarkers={this.searchedMarkers}
             filterList={this.filterList}
 
           />
