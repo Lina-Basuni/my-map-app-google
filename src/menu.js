@@ -24,12 +24,12 @@ class Menu extends Component{
               id="mySearch"
               placeholder="Search.."
               title="Type in a category"
-              //value={this.props.query}
-              /*onChange={
+              value={this.props.query}
+              onChange={
                 (event)=>{
                   this.props.changeQuery(event.target.value)
                 }
-              }*/
+              }
               />
             <ul id="myMenu">
             {

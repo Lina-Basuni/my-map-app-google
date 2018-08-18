@@ -13,9 +13,9 @@ class App extends Component {
    initMarkers: [],
    currentMarkerID:-1,
    googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
-   zoom:13,
+   zoom:13.5,
    center:{lat: 25.715043, lng: 32.622112},
-   //query:''
+   query:''
   }
   componentDidMount(){
     this.getMarkers()
@@ -55,25 +55,25 @@ class App extends Component {
   closeInfoBox=()=>{
     this.setState({
       currentMarkerID:-1,
-      zoom:13,
+      zoom:13.5,
       center:{lat: 25.715043, lng: 32.622112}
     })
   }
-  /*changeQuery=(query)=>{
+  changeQuery=(query)=>{
     this.setState({query:query})
     this.filterList(query)
-  }*/
+  }
 
-  /*filterList=(query)=>{
+  filterList=(query)=>{
     if(query){
       const match= new RegExp(escapeRegExp(query),'i')
-      let sMarkers=this.state.initMarkers.filter((marker)=>match.test(marker.id))
+      let sMarkers=this.state.initMarkers.filter((marker)=>match.test(marker.name))
       this.setState({listMarkers:sMarkers})
     }
     else{
       this.setState({listMarkers:this.state.initMarkers})
     }
-  }*/
+  }
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
   openNav= ()=> {
       document.getElementById("mySidenav").style.width = "250px";
@@ -101,9 +101,9 @@ class App extends Component {
             listMarkers={this.state.listMarkers}
             openInfoBox={this.openInfoBox}
             closeInfoBox={this.closeInfoBox}
-            //query={this.state.query}
-            //changeQuery={this.changeQuery}
-            //filterList={this.filterList}
+            query={this.state.query}
+            changeQuery={this.changeQuery}
+            filterList={this.filterList}
 
           />
           </div>

@@ -15,7 +15,7 @@ const Map = withScriptjs(withGoogleMap((props) =>
 
     {
 
-      props.initMarkers.map(
+      props.listMarkers.map(
         (marker)=>{
           const lat=marker.location.lat;
           const lng=marker.location.lng;
