@@ -4,7 +4,7 @@ class Menu extends Component{
   render(){
     return(
       <div className="menu">
-        <div className="menu_icon"
+        <div className="menu_icon" id="menuIcon"
         onClick={
             ()=>{
               this.props.openNav()
@@ -27,6 +27,7 @@ class Menu extends Component{
               value={this.props.query}
               onChange={
                 (event)=>{
+                  //passin the value of the search bar to the changeQuery function
                   this.props.changeQuery(event.target.value)
                 }
               }
@@ -38,7 +39,7 @@ class Menu extends Component{
                 const lng=marker.location.lng;
                 return(
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     key={marker.id}
                     onClick={
                       ()=>(

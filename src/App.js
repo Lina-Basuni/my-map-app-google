@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleMap, Marker } from "react-google-maps";
 import Map from './map';
-import logo from './logo.svg';
 import Menu from './menu';
 import './App.css';
 import escapeRegExp from 'escape-string-regexp'
@@ -12,7 +10,7 @@ class App extends Component {
    listMarkers: [],
    initMarkers: [],
    currentMarkerID:-1,
-   googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+   googleMapURL:"https://maps.googleapis.com/maps/api/js?key=AIzaSyCiflduNSs_ezPtylJ_Q1p8r-ZOAXvhQmQ&v=3.exp&libraries=geometry,drawing,places",
    zoom:13.5,
    center:{lat: 25.715043, lng: 32.622112},
    query:''
@@ -23,6 +21,7 @@ class App extends Component {
     this.getMap();
   }
 
+//function to get map's URL
   getMap=()=>{
     const mapURL=this.state.googleMapURL;
     fetch(mapURL,{mode: 'no-cors'})
@@ -34,6 +33,8 @@ class App extends Component {
     })
   }
 
+//function to get locations from Foursquare API and set them
+//to initMarkers array in the state
   getMarkers= ()=>{
     const endPoint ="https://api.foursquare.com/v2/venues/search?"
     const parameters={
@@ -57,7 +58,9 @@ class App extends Component {
     })
   }
 
+//function to handle click on marker
   openInfoBox=(lat,lng,markerID)=>{
+    this.closeNav()
     this.setState({
       currentMarkerID:markerID,
       zoom:15,
@@ -65,6 +68,7 @@ class App extends Component {
     })
   }
 
+//function to handle click on close button on infoBox
   closeInfoBox=()=>{
     this.setState({
       currentMarkerID:-1,
@@ -72,11 +76,15 @@ class App extends Component {
       center:{lat: 25.715043, lng: 32.622112}
     })
   }
+
+  //function to handle change of text in search box as user types
   changeQuery=(query)=>{
     this.setState({query:query})
     this.filterList(query)
   }
 
+//function to match query typed into the search box with a marker in the
+//initMarkers array and add the matching ones into the listMarkers array
   filterList=(query)=>{
     if(query){
       const match= new RegExp(escapeRegExp(query),'i')
@@ -87,16 +95,19 @@ class App extends Component {
       this.setState({listMarkers:this.state.initMarkers})
     }
   }
-  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+
+  //Set the width of the side navigation to 250px and the left margin of the page content to 250px
   openNav= ()=> {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
+      document.getElementById("menuIcon").style.visibility = "hidden";
   }
 
-  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+  //Set the width of the side navigation to 0 and the left margin of the page content to 0
   closeNav= ()=> {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft = "0";
+      document.getElementById("menuIcon").style.visibility = "visible";
   }
 
 
@@ -120,7 +131,7 @@ class App extends Component {
 
           />
           </div>
-          <div className="App-title">My Map</div>
+          <div className="App-title">Luxor Temples</div>
           </header>
           <div className="body">
             <div className="mapContainer">

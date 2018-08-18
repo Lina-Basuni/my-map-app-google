@@ -1,6 +1,4 @@
 import React from "react"
-import { compose, withProps , withStateHandlers } from "recompose"
-
 import { withScriptjs,withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 
@@ -29,6 +27,7 @@ const Map = withScriptjs(withGoogleMap((props) =>
                     props.openInfoBox(lat,lng,marker.id)
                 }
             }
+            //animation for the marker when clicked on
             animation={props.currentMarkerID===marker.id ? 1 : null}
             >
             {props.currentMarkerID===marker.id &&
