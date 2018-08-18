@@ -32,8 +32,8 @@ class Menu extends Component{
               }
               />
             <ul id="myMenu">
-            {
-              this.props.markers.map((marker) => {
+            {/*
+              this.props.listMarkers.map((marker) => {
                 return(
                   <a
                     href="#"
@@ -48,7 +48,7 @@ class Menu extends Component{
                   </a>
                 )
               })
-            }
+            */}
             </ul>
           </div>
 

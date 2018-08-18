@@ -15,16 +15,18 @@ const Map = withScriptjs(withGoogleMap((props) =>
 
     {
 
-      props.markers.map(
-        (marker)=>(
-          <div key={marker.id}>
+      props.initMarkers.map(
+        (marker)=>{
+          const lat=marker.location.lat;
+          const lng=marker.location.lng;
+          return(<div key={marker.id}>
             <Marker
-            title={marker.id}
+            title={marker.name}
             id={marker.id}
-            position={marker.position}
+            position={{lat,lng}}
             onClick={
                 (event) => {
-                    props.openInfoBox(marker.position,marker.id)
+                    props.openInfoBox(lat,lng,marker.id)
                 }
             }
             animation={props.currentMarkerID===marker.id ? 1 : null}
@@ -34,13 +36,13 @@ const Map = withScriptjs(withGoogleMap((props) =>
                 onCloseClick={props.closeInfoBox}>
                 <div style={{ backgroundColor: `#FFFFFF`, padding: `12px` }}>
                   <div style={{ fontSize: `16px`, fontColor: `#03191B` }}>
-                  {marker.id}
+                  {marker.name}
                   </div>
                 </div>
               </InfoBox>)}
             </Marker>
-          </div>
-        )
+          </div>)
+        }
       )
     }
   </div>
