@@ -17,8 +17,21 @@ class App extends Component {
    center:{lat: 25.715043, lng: 32.622112},
    query:''
   }
+
   componentDidMount(){
-    this.getMarkers()
+    this.getMarkers();
+    this.getMap();
+  }
+
+  getMap=()=>{
+    const mapURL=this.state.googleMapURL;
+    fetch(mapURL,{mode: 'no-cors'})
+    .then((response)=>{
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log("Error is : ", err);
+    })
   }
 
   getMarkers= ()=>{
@@ -40,7 +53,7 @@ class App extends Component {
         listMarkers:markersArr
       })
     }).catch((err) => {
-      console.log("ERROR!! "+err);
+      console.log("Error is : "+err);
     })
   }
 
