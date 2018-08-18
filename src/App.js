@@ -9,13 +9,13 @@ import  axios from 'axios'
 
 class App extends Component {
   state = {
-   /*listMarkers: [],*/
+   listMarkers: [],
    initMarkers: [],
    currentMarkerID:-1,
    googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
    zoom:13,
    center:{lat: 25.715043, lng: 32.622112},
-   query:''
+   //query:''
   }
   componentDidMount(){
     this.getMarkers()
@@ -35,7 +35,10 @@ class App extends Component {
     .then(response=>{
       console.log(response.data.response.venues);
       let markersArr=response.data.response.venues;
-      this.setState({initMarkers:markersArr})
+      this.setState({
+        initMarkers:markersArr,
+        listMarkers:markersArr
+      })
     }).catch((err) => {
       console.log("ERROR!! "+err);
     })
@@ -56,12 +59,12 @@ class App extends Component {
       center:{lat: 25.715043, lng: 32.622112}
     })
   }
-/*  changeQuery=(query)=>{
+  /*changeQuery=(query)=>{
     this.setState({query:query})
     this.filterList(query)
-  }
+  }*/
 
-  filterList=(query)=>{
+  /*filterList=(query)=>{
     if(query){
       const match= new RegExp(escapeRegExp(query),'i')
       let sMarkers=this.state.initMarkers.filter((marker)=>match.test(marker.id))
@@ -95,12 +98,12 @@ class App extends Component {
           <Menu
             openNav={this.openNav}
             closeNav={this.closeNav}
-            /*listMarkers={this.state.listMarkers}*/
+            listMarkers={this.state.listMarkers}
             openInfoBox={this.openInfoBox}
             closeInfoBox={this.closeInfoBox}
-            /*query={this.state.query}
-            changeQuery={this.changeQuery}
-            filterList={this.filterList}*/
+            //query={this.state.query}
+            //changeQuery={this.changeQuery}
+            //filterList={this.filterList}
 
           />
           </div>
@@ -114,7 +117,7 @@ class App extends Component {
             containerElement={<div style={{ height: `590px` }} />}
             mapElement={<div style={{ height: `100%` }}/>}
             initMarkers={this.state.initMarkers}
-            /*listMarkers={this.state.listMarkers}*/
+            listMarkers={this.state.listMarkers}
             openInfoBox={this.openInfoBox}
             closeInfoBox={this.closeInfoBox}
             currentMarkerID={this.state.currentMarkerID}

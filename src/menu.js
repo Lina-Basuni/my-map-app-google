@@ -24,31 +24,33 @@ class Menu extends Component{
               id="mySearch"
               placeholder="Search.."
               title="Type in a category"
-              value={this.props.query}
-              onChange={
+              //value={this.props.query}
+              /*onChange={
                 (event)=>{
                   this.props.changeQuery(event.target.value)
                 }
-              }
+              }*/
               />
             <ul id="myMenu">
-            {/*
+            {
               this.props.listMarkers.map((marker) => {
+                const lat=marker.location.lat;
+                const lng=marker.location.lng;
                 return(
                   <a
                     href="#"
                     key={marker.id}
                     onClick={
                       ()=>(
-                        this.props.openInfoBox(marker.position,marker.id)
+                        this.props.openInfoBox(lat,lng,marker.id)
                       )
                     }
                   >
-                    {marker.id}
+                    {marker.name}
                   </a>
                 )
               })
-            */}
+            }
             </ul>
           </div>
 
