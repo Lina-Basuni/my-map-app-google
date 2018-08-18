@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import Menu from './menu';
 import './App.css';
 import escapeRegExp from 'escape-string-regexp'
+import  axios from 'axios'
 
 class App extends Component {
   state = {
@@ -60,23 +61,35 @@ class App extends Component {
        "position":{ lat: 24.452133, lng: 32.928432  }
      }
    ],
+   fetchedMarkers:[],
    currentMarkerID:-1,
    googleMapURL:"https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
    zoom:6.2,
    center:{lat: 26.820553, lng: 30.802498},
    query:''
   }
-
-  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-  openNav= ()=> {
-      document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
+  componentDidMount(){
+    this.getMarkers()
   }
 
-  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-  closeNav= ()=> {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
+  getMarkers= ()=>{
+    const endPoint ="https://api.foursquare.com/v2/venues/search?"
+    const parameters={
+      client_id:"KYHC5HMNQLL5P4ZTFTXRBC0VUHZ2XMGSUCZ2M3QLN4CO1ZUO",
+      client_secret:"G102FXJGMYLZZ4PSI4H1JT3BRK5API1LHNMXLDMWTZSPQEYO",
+      query:"Temple",
+      near:"Luxor",
+      limit:"10",
+      v:"20180908"
+    }
+    axios.get(endPoint+ new URLSearchParams(parameters))
+    .then(response=>{
+      console.log(response.data.response.venues);
+      let markersArr=response.data.response.venues;
+      this.setState({fetchedMarkers:markersArr})
+    }).catch((err) => {
+      console.log("ERROR!! "+err);
+    })
   }
 
   openInfoBox=(markerPos,markerID)=>{
@@ -109,6 +122,18 @@ class App extends Component {
       this.setState({markers:this.state.initMarkers})
     }
   }
+  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+  openNav= ()=> {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+  closeNav= ()=> {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+  }
+
 
 
   render() {
