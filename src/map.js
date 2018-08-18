@@ -38,6 +38,9 @@ const Map = withScriptjs(withGoogleMap((props) =>
                   <div style={{ fontSize: `16px`, fontColor: `#03191B` }}>
                   {marker.name}
                   </div>
+                  <h2 style={{fontSize:`14px`,fontColor:`#03191B`, fontWeight:`1`}}>
+                    Address: {marker.location.formattedAddress[0]} ,{marker.location.formattedAddress[1]} ,{marker.location.formattedAddress[3]}
+                  </h2>
                 </div>
               </InfoBox>)}
             </Marker>
