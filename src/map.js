@@ -17,6 +17,7 @@ const Map = withScriptjs(withGoogleMap((props) =>
         (marker)=>{
           const lat=marker.location.lat;
           const lng=marker.location.lng;
+          const address = `${marker.location.formattedAddress[0] || ''}, ${marker.location.formattedAddress[1] || ''}, ${marker.location.formattedAddress[3] || ''}`;
           return(<div key={marker.id}>
             <Marker
             title={marker.name}
@@ -37,9 +38,12 @@ const Map = withScriptjs(withGoogleMap((props) =>
                   <div style={{ fontSize: `16px`, fontColor: `#03191B` }}>
                   {marker.name}
                   </div>
-                  <h2 style={{fontSize:`14px`,fontColor:`#03191B`, fontWeight:`1`}}>
-                    Address: {marker.location.formattedAddress[0]} ,{marker.location.formattedAddress[1]} ,{marker.location.formattedAddress[3]}
+                  <h2 style={{fontSize:`14px`,fontColor:`#03191B`, fontWeight:`400`}}>
+                    Address: {address}
                   </h2>
+                  <h3 style={{fontSize:`12px`,fontColor:`#03191B`, fontWeight:`1`}}>
+                    Data Fetched From FourSquare API
+                  </h3>
                 </div>
               </InfoBox>)}
             </Marker>

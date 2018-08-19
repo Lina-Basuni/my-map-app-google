@@ -31,7 +31,8 @@ class App extends Component {
       console.log(response);
     })
     .catch((err) => {
-      console.log("Error is : ", err);
+      alert("Failed To Load Google Maps API");
+      console.log(`Error is : ${err}`);
     })
   }
 
@@ -56,7 +57,8 @@ class App extends Component {
         listMarkers:markersArr
       })
     }).catch((err) => {
-      console.log("Error is : "+err);
+      alert("Failed To Load FourSquare API");
+      console.log(`Error is : ${err}`);
     })
   }
 
