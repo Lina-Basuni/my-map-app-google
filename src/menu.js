@@ -27,11 +27,12 @@ class Menu extends Component{
         className="sidenav"
         tabIndex={this.props.navOpen?'0':'-1'}
         >
-          <a href="javascript:void(0)" className="closebtn"
+          <a href="" className="closebtn"
           tabIndex={this.props.navOpen?'0':'-1'}
           aria-label="Close Menu Button"
-          role="Button"
-          onClick={()=>{
+          role="button"
+          onClick={(e)=>{
+            e.preventDefault()
             this.props.closeNav()
           }}>&times;</a>
           <div className="searchWrapper">
@@ -57,7 +58,7 @@ class Menu extends Component{
                 const lng=marker.location.lng;
                 return(
                   <button
-                    href="javascript:void(0)"
+                    href=""
                     key={marker.id}
                     tabIndex={this.props.navOpen?'0':'-1'}
                     aria-label="places list item"
