@@ -4,18 +4,34 @@ class Menu extends Component{
   render(){
     return(
       <div className="menu">
-        <div className="menu_icon" id="menuIcon"
+        <div className="menu_icon" id="menuIcon" tabIndex='0'
+        aria-label="Menu Button"
+        role="button"
         onClick={
             ()=>{
               this.props.openNav()
             }
-          }>
+          }
+        onKeyPress={
+          ()=>{
+            this.props.openNav()
+          }
+        }
+          >
           <div className="bar1"></div>
           <div className="bar2"></div>
           <div className="bar3"></div>
         </div>
-        <div id="mySidenav" className="sidenav">
-          <a href="javascript:void(0)" className="closebtn" onClick={()=>{
+        <div
+        id="mySidenav"
+        className="sidenav"
+        tabIndex={this.props.navOpen?'0':'-1'}
+        >
+          <a href="javascript:void(0)" className="closebtn"
+          tabIndex={this.props.navOpen?'0':'-1'}
+          aria-label="Close Menu Button"
+          role="Button"
+          onClick={()=>{
             this.props.closeNav()
           }}>&times;</a>
           <div className="searchWrapper">
@@ -23,7 +39,9 @@ class Menu extends Component{
               type="text"
               id="mySearch"
               placeholder="Search.."
-              title="Type in a category"
+              title="Type in a place"
+              tabIndex={this.props.navOpen?'0':'-1'}
+              aria-label="Type in a place"
               value={this.props.query}
               onChange={
                 (event)=>{
@@ -32,15 +50,17 @@ class Menu extends Component{
                 }
               }
               />
-            <ul id="myMenu">
+            <ul id="myMenu" tabIndex={this.props.navOpen?'0':'-1'}>
             {
               this.props.listMarkers.map((marker) => {
                 const lat=marker.location.lat;
                 const lng=marker.location.lng;
                 return(
-                  <a
+                  <button
                     href="javascript:void(0)"
                     key={marker.id}
+                    tabIndex={this.props.navOpen?'0':'-1'}
+                    aria-label="places list item"
                     onClick={
                       ()=>(
                         this.props.openInfoBox(lat,lng,marker.id)
@@ -48,7 +68,7 @@ class Menu extends Component{
                     }
                   >
                     {marker.name}
-                  </a>
+                  </button>
                 )
               })
             }

@@ -11,9 +11,11 @@ class App extends Component {
    initMarkers: [],
    currentMarkerID:-1,
    googleMapURL:"https://maps.googleapis.com/maps/api/js?key=AIzaSyCiflduNSs_ezPtylJ_Q1p8r-ZOAXvhQmQ&v=3.exp&libraries=geometry,drawing,places",
+   fourSquareURL:"https://api.foursquare.com/v2/venues/search?",
    zoom:13.5,
    center:{lat: 25.715043, lng: 32.622112},
-   query:''
+   query:'',
+   navOpen:false
   }
 
   componentDidMount(){
@@ -23,8 +25,8 @@ class App extends Component {
 
 //function to get map's URL
   getMap=()=>{
-    const mapURL=this.state.googleMapURL;
-    fetch(mapURL,{mode: 'no-cors'})
+    const URL=this.state.googleMapURL;
+    fetch(URL,{mode: 'no-cors'})
     .then((response)=>{
       console.log(response);
     })
@@ -36,8 +38,8 @@ class App extends Component {
 //function to get locations from Foursquare API and set them
 //to initMarkers array in the state
   getMarkers= ()=>{
-    const endPoint ="https://api.foursquare.com/v2/venues/search?"
-    const parameters={
+    const URL = this.state.fourSquareURL;
+    const params={
       client_id:"KYHC5HMNQLL5P4ZTFTXRBC0VUHZ2XMGSUCZ2M3QLN4CO1ZUO",
       client_secret:"G102FXJGMYLZZ4PSI4H1JT3BRK5API1LHNMXLDMWTZSPQEYO",
       query:"Temple",
@@ -45,7 +47,7 @@ class App extends Component {
       limit:"10",
       v:"20180908"
     }
-    axios.get(endPoint+ new URLSearchParams(parameters))
+    axios.get(URL+ new URLSearchParams(params))
     .then(response=>{
       console.log(response.data.response.venues);
       let markersArr=response.data.response.venues;
@@ -101,6 +103,7 @@ class App extends Component {
       document.getElementById("mySidenav").style.width = "250px";
       document.getElementById("main").style.marginLeft = "250px";
       document.getElementById("menuIcon").style.visibility = "hidden";
+      this.setState({navOpen:true});
   }
 
   //Set the width of the side navigation to 0 and the left margin of the page content to 0
@@ -108,6 +111,7 @@ class App extends Component {
       document.getElementById("mySidenav").style.width = "0";
       document.getElementById("main").style.marginLeft = "0";
       document.getElementById("menuIcon").style.visibility = "visible";
+      this.setState({navOpen:false});
   }
 
 
@@ -128,13 +132,14 @@ class App extends Component {
             query={this.state.query}
             changeQuery={this.changeQuery}
             filterList={this.filterList}
+            navOpen={this.state.navOpen}
 
           />
           </div>
           <div className="App-title">Luxor Temples</div>
           </header>
-          <div className="body">
-            <div className="mapContainer">
+          <div className="body" tabIndex='-1'>
+            <div className="mapContainer" tabIndex='-1'>
             <Map
             googleMapURL={this.state.googleMapURL}
             loadingElement={<div style={{ height: `100%` }} />}
