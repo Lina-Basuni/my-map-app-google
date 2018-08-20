@@ -15,7 +15,8 @@ class App extends Component {
    zoom:13.5,
    center:{lat: 25.715043, lng: 32.622112},
    query:'',
-   navOpen:false
+   navOpen:false,
+   mapIsLoaded:false
   }
 
   componentDidMount(){
