@@ -16,7 +16,7 @@ class App extends Component {
    center:{lat: 25.715043, lng: 32.622112},
    query:'',
    navOpen:false,
-   mapIsLoaded:false
+   mapIsLoaded:""
   }
 
   componentDidMount(){
@@ -24,16 +24,40 @@ class App extends Component {
     this.getMap();
   }
 
+  /*********function to check if map is loaded or not before rendering the map component*********/
+  checkMapIsLoaded=()=>{
+    if(this.state.mapIsLoaded===true){
+      return(
+        <Map
+        googleMapURL={this.state.googleMapURL}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `590px` }} />}
+        mapElement={<div style={{ height: `100%` }}/>}
+        initMarkers={this.state.initMarkers}
+        listMarkers={this.state.listMarkers}
+        openInfoBox={this.openInfoBox}
+        closeInfoBox={this.closeInfoBox}
+        currentMarkerID={this.state.currentMarkerID}
+        zoom={this.state.zoom}
+        center={this.state.center}
+        />
+      )
+    }
+    if(this.state.mapIsLoaded===false) {
+      alert("can't load map")
+    }
+  }
+
 //function to get map's URL
   getMap=()=>{
     const URL=this.state.googleMapURL;
     fetch(URL,{mode: 'no-cors'})
     .then((response)=>{
+      this.setState({mapIsLoaded:true})
       console.log(response);
     })
     .catch((err) => {
-      alert("Failed To Load Google Maps API");
-      console.log(`Error is : ${err}`);
+      this.setState({mapIsLoaded:false})
     })
   }
 
@@ -118,7 +142,6 @@ class App extends Component {
   }
 
 
-
   render() {
     return (
 
@@ -143,19 +166,7 @@ class App extends Component {
           </header>
           <div className="body" tabIndex='-1'>
             <div className="mapContainer" tabIndex='-1'>
-            <Map
-            googleMapURL={this.state.googleMapURL}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `590px` }} />}
-            mapElement={<div style={{ height: `100%` }}/>}
-            initMarkers={this.state.initMarkers}
-            listMarkers={this.state.listMarkers}
-            openInfoBox={this.openInfoBox}
-            closeInfoBox={this.closeInfoBox}
-            currentMarkerID={this.state.currentMarkerID}
-            zoom={this.state.zoom}
-            center={this.state.center}
-            />
+            {this.checkMapIsLoaded()}
             </div>
           </div>
           </div>
