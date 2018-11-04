@@ -1,4 +1,4 @@
-# MyReads
+# MyMap
 
 This is  the final project for Udacity's Front-End Web Development Nano-Degree.
 This is a map app showing Luxor's most famous Temples.
