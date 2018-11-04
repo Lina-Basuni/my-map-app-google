@@ -31,7 +31,7 @@ class App extends Component {
         <Map
         googleMapURL={this.state.googleMapURL}
         loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `590px` }} />}
+        containerElement={<div style={{ height: `92.9vh` }} />}
         mapElement={<div style={{ height: `100%` }}/>}
         initMarkers={this.state.initMarkers}
         listMarkers={this.state.listMarkers}
